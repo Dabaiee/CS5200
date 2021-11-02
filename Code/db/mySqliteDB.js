@@ -165,6 +165,31 @@ async function insertCourse(course) {
   }
 }
 
+async function insertStudent(student) {
+  const db = await open({
+    filename: "./db/database.db",
+    driver: sqlite3.Database,
+  });
+
+  const stmt = await db.prepare(`INSERT INTO
+    Student(studentID, firstName, lastName, gender, phoneNumber, email, address)
+    VALUES (@studentID, @firstName, @lastName, @gender, @phoneNumber, @email, @address);`);
+
+  try {
+    return await stmt.run({
+      "@studentID": student.studentID,
+      "@firstName": student.firstName,
+      "@lastName":student.lastName,
+      "@gender": student.gender,
+      "@phoneNumber": student.phoneNumber,
+      "@email": student.email,
+      "@address": student.address,
+    });
+  } finally {
+    await stmt.finalize();
+    db.close();
+  }
+}
 
 async function getStudentsByCourseID(courseID) {
   console.log("getStudentsByCourseID", courseID);
@@ -192,6 +217,33 @@ async function getStudentsByCourseID(courseID) {
   }
 }
 
+async function getCoachByCourseID(courseID) {
+  console.log("getCoachByCourseID", courseID);
+
+  const db = await open({
+    filename: "./db/database.db",
+    driver: sqlite3.Database,
+  });
+
+  const stmt = await db.prepare(`
+    SELECT * FROM Coach
+    WHERE Coach.coachID in (
+      SELECT Course.coachID FROM Course
+      WHERE courseID = @courseID
+    )
+    `);
+
+  const params = {
+    "@courseID": courseID,
+  };
+
+  try {
+    return await stmt.all(params);
+  } finally {
+    await stmt.finalize();
+    db.close();
+  }
+}
 
 async function addStudentIDToCourseID(studentID, courseID) {
   console.log("addStudentIDToCourseID", studentID, courseID);
@@ -225,8 +277,10 @@ async function addStudentIDToCourseID(studentID, courseID) {
 module.exports.getCourses = getCourses;
 module.exports.getCoursesCount = getCoursesCount;
 module.exports.insertCourse = insertCourse;
+module.exports.insertStudent = insertStudent;
 module.exports.getCourseByID = getCourseByID;
 module.exports.updateCourseByID = updateCourseByID;
 module.exports.deleteCourseByID = deleteCourseByID;
 module.exports.getStudentsByCourseID = getStudentsByCourseID;
+module.exports.getCoachByCourseID = getCoachByCourseID;
 module.exports.addStudentIDToCourseID = addStudentIDToCourseID;

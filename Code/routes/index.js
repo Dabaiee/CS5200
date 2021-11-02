@@ -5,7 +5,7 @@ const myDb = require("../db/mySqliteDB.js");
 
 /* GET home page. */
 router.get("/", async function (req, res, next) {
-  res.redirect("/courses");
+  res.redirect("/schedule");
 });
 
 // http://localhost:3000/courses?pageSize=24&page=3&q=Chang
@@ -135,6 +135,33 @@ router.post("/createCourse", async (req, res, next) => {
   }
 });
 
+router.post("/createStudent", async (req, res, next) => {
+  const student = req.body;
+
+  try {
+    console.log(student);
+    const insertRes = await myDb.insertStudent(student);
+    console.log("Inserted", insertRes);
+  } catch (err) {
+    console.log("Error inserting", err);
+    next(err);
+  }
+});
+
+// router.get("/coaches/:coachID", async (req, res, next) => {
+//   const coachID = req.params.coachID;
+//
+//   try {
+//
+//     let coach = await myDb.getCoachByID(coachID);
+//     console.log("coach", coach);
+//
+//
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
 router.get("/schedule", async (req, res, next) => {
   const query = req.query.q || "";
   const page = +req.query.page || 1;
@@ -168,9 +195,10 @@ router.get("/courses/:courseID/schedule", async (req, res, next) => {
 
     let course = await myDb.getCourseByID(courseID);
     let students = await myDb.getStudentsByCourseID(courseID);
-
+    let coach = await  myDb.getCoachByCourseID(courseID);
     console.log("schedule course", {
       course,
+      coach,
       students,
       msg,
     });
@@ -178,6 +206,7 @@ router.get("/courses/:courseID/schedule", async (req, res, next) => {
 
     res.render("./pages/scheduleCourse", {
       course,
+      coach,
       students,
       msg,
     });
@@ -185,25 +214,25 @@ router.get("/courses/:courseID/schedule", async (req, res, next) => {
     next(err);
   }
 });
-
-router.post("/courses/:courseID/schedule", async (req, res, next) => {
-  const courseID = req.params.courseID;
-  const course = req.body;
-
-  try {
-
-    let updateResult = await myDb.updateCourseByID(courseID, course);
-    console.log("update", updateResult);
-
-    if (updateResult && updateResult.changes === 1) {
-      res.redirect("/courses/?msg=Updated");
-    } else {
-      res.redirect("/courses/?msg=Error Updating");
-    }
-
-  } catch (err) {
-    next(err);
-  }
-});
+//
+// router.post("/courses/:courseID/schedule", async (req, res, next) => {
+//   const courseID = req.params.courseID;
+//   const course = req.body;
+//
+//   try {
+//
+//     let updateResult = await myDb.updateCourseByID(courseID, course);
+//     console.log("update", updateResult);
+//
+//     if (updateResult && updateResult.changes === 1) {
+//       res.redirect("/courses/?msg=Updated");
+//     } else {
+//       res.redirect("/courses/?msg=Error Updating");
+//     }
+//
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 module.exports = router;
