@@ -227,10 +227,9 @@ async function getCoachByCourseID(courseID) {
 
   const stmt = await db.prepare(`
     SELECT * FROM Coach
-    WHERE Coach.coachID in (
-      SELECT Course.coachID FROM Course
-      WHERE courseID = @courseID
-    )
+    NATURAL JOIN Course
+    WHERE Coach.coachID = Course.coachID
+    AND Course.courseID = @courseID
     `);
 
   const params = {
