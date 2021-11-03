@@ -26,19 +26,29 @@ Coach: first name, last name, time to register on a coach, phone, ratings, locat
 
 Verbs(Assosiations): appoints
 
-2. Conceptual Model *png
+
+2.Conceptual Model *png
+
 	./SQL_backup
-3. Logical Model *png
+	
+3.Logical Model *png
+
 	./SQL_backup
+	
 4.database *db *sql
+
 	./SQL_backup
-5. query *sql
+5.query *sql
+
 	./SQL_backup
+	
 6.What is the project?
 
 The project is to implement a web application for a driving school scheduling system allowing both managers and students to use it. Managers can create, read, update, and edit the courses' information from the manager page. Students can create an account, register for courses, and find information about them.
 
 7.Team member contribution
+
+
 Individual Contributions
 
 Chang Guan implements: 
