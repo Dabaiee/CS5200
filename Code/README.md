@@ -1,5 +1,5 @@
-# nodeExpressSqliteEJS
-An Application Using Node + Expres + SQlite + EJS implementing a Driving School Scheduling System
+# DrivingSchoolSchedulingSystem
+An Application Using Node + Expres + SQlite + EJS implementing a Driving School Scheduling System for both students and managers.
 
 
 ## Using it
