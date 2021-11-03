@@ -245,23 +245,24 @@ async function getCoachByCourseID(courseID) {
   }
 }
 
-async function addStudentIDToCourseID(studentID, courseID) {
-  console.log("addStudentIDToCourseID", studentID, courseID);
+async function addStudentIDToCourseID(courseID, studentID) {
+  console.log("addStudentIDToCourseID", courseID, studentID);
 
   const db = await open({
     filename: "./db/database.db",
     driver: sqlite3.Database,
+
   });
 
   const stmt = await db.prepare(`
     INSERT INTO
-    Appointments(studentID, courseID)
-    VALUES (@studentID, @courseID);
+    Appointments(courseID, studentID)
+    VALUES (@courseID, @studentID);
     `);
 
   const params = {
-    "@studentID": studentID,
     "@courseID": courseID,
+    "@studentID": studentID,
   };
 
   try {
