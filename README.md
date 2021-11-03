@@ -29,9 +29,13 @@ Verbs(Assosiations): appoints
 
 2.Conceptual Model *png
 
+![alt text](https://github.com/Dabaiee/CS5200/blob/main/2.Conceptual%20Model%20of%20Driving%20School%20Scheduling%20System%20(2).png?raw=true)
+
 	./SQL_backup
 	
 3.Logical Model *png
+
+![alt text](https://github.com/guanchang98/DatabaseProject1/blob/main/3.Logical%20model%20of%20Driving%20School%20Scheduling%20System.png?raw=true)
 
 	./SQL_backup
 	
