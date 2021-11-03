@@ -27,9 +27,32 @@ Coach: first name, last name, time to register on a coach, phone, ratings, locat
 Verbs(Assosiations): appoints
 
 2. Conceptual Model *png
-
+	./SQL_backup
 3. Logical Model *png
-
+	./SQL_backup
 4.database *db *sql
-
+	./SQL_backup
 5. query *sql
+	./SQL_backup
+6.What is the project?
+
+The project is to implement a web application for a driving school scheduling system allowing both managers and students to use it. Managers can create, read, update, and edit the courses' information from the manager page. Students can create an account, register for courses, and find information about them.
+
+7.Team member contribution
+Individual Contributions
+
+Chang Guan implements: 
+	UML class diagram
+	Designing the page of managers, allowing managers to CRUD courses.
+	CRUD operations on the courses' information
+	CRUD appointments and implement adding students to a certain course.
+	Query/ filter functions. Such as searching courses by name, sorting by start time.
+	Implement the web application of manager's page, DB, and testing. Creating the database, and importing test data.
+
+Tong Zhou implements:
+	ERD and relational schema
+	Designing the page of students, and students can create a new account, has a overview of courses and register in.
+	CRUD operations on the students' information
+	CRUD operations on the coaches' information
+	Showing information of courses for students, including coaches' information and courses' information. 
+	Implement the web application's student page, front-end, and back-end, redirections, debugging.
