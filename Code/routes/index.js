@@ -109,6 +109,9 @@ router.get("/courses/:courseID/delete", async (req, res, next) => {
     let deleteResult = await myDb.deleteCourseByID(courseID);
     console.log("delete", deleteResult);
 
+    // I really like how you put the message into the url
+    // and showing it as an alert-primary.
+    
     if (deleteResult && deleteResult.changes === 1) {
       res.redirect("/courses/?msg=Deleted");
     } else {
